@@ -3,16 +3,22 @@ package utils;
 import Exceptions.InvalidArraySizeException;
 import Exceptions.NullMatrixException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import org.apache.commons.io.IOUtils;
+
 import static java.util.Objects.isNull;
 
 public class Matrix {
-    public static double[][] setMatrix() {
+    public static double[][] setMatrixManually() {
         //double nullMatrix[][] = null;
         Scanner input = new Scanner(System.in);
 
@@ -64,7 +70,7 @@ public class Matrix {
         return matrix;
     }
 
-    public static double[] setMatrixExtension(double[][] matrix) {
+    public static double[] setMatrixExtensionManually(double[][] matrix) {
         if (isNull(matrix)) {
             System.out.println("Матрица не была задана!");
             System.exit(1);
@@ -89,6 +95,38 @@ public class Matrix {
         input.close();
         System.out.println("Конец ввода матричного дополнения.\n");
         return matrixExtension;
+    }
+
+    public static Result setViaFile() {
+        Scanner input = new Scanner(System.in);
+        String pathExample = "C:\\Users\\danis\\OneDrive\\Рабочий стол\\untitled\\src\\main\\resources\\file.txt";
+        System.out.println("Введите путь к файлу в формате\n" + pathExample);
+        String path = input.nextLine();
+        try(FileInputStream reader = new FileInputStream(path)) {
+
+            String everything = IOUtils.toString(reader);
+            String[] modded = everything.split("\n");
+            int size = modded.length;
+            String[][] modded2 = new String[size][0];
+
+            double[][] matrix = new double[size][size];
+            double[] matrixExtension = new double[size];
+
+            for(int i = 0; i < size; i++) {
+                modded2[i] = modded[i].trim().split(" ");
+            }
+            for(int i = 0; i < size; i++) {
+                for(int j = 0; j < size; j++) {
+                    matrix[i][j] = Double.parseDouble(modded2[i][j]);
+                }
+                matrixExtension[i] = Double.parseDouble(modded2[i][size]);
+            }
+            reader.close();
+            return new Result(matrix, matrixExtension);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return new Result(null, null);
+        }
     }
 
     public static void printMatrix(double[][] matrixA, double[] matrixB) {

@@ -1,17 +1,28 @@
-import java.util.Scanner;
+import utils.Result;
 
-import utils.Matrix;
-
-import static java.util.Objects.isNull;
 import static utils.Matrix.*;
+import static utils.InputModeSwitch.*;
 
 public class Main {
     public static void main(String[] args) {
-        double[][] matrixA;
-        double[] matrixB;
+        int inputMode = getInputMode();
 
-        matrixA = setMatrix();
-        matrixB = setMatrixExtension(matrixA);
+        double[][] matrixA = null;
+        double[] matrixB = null;
+
+        if (inputMode == 1) {
+            matrixA = setMatrixManually();
+            matrixB = setMatrixExtensionManually(matrixA);
+        } else if (inputMode == 2) {
+            Result result = setViaFile();
+            matrixA = result.getMatrix();
+            matrixB = result.getMatrixExtension();
+        } else {
+            System.out.println("Режим ввода не был выбран! (Ошибка при вводе или такого режима не существует).");
+            System.exit(1);
+        }
+
+
 
 /*        double[][] matrixA = {{1, 2}, {3, 4}};
         double[] matrixB = {5, 6};*/
