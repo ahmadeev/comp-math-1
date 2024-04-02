@@ -1,14 +1,19 @@
+import utils.LineResult;
+import utils.Messages;
 import utils.Result;
 
 import static utils.Matrix.*;
 import static utils.InputModeSwitch.*;
+import static utils.Messages.MATRIX_OUTPUT_INFO_3;
 
 public class Main {
     public static void main(String[] args) {
+
         int inputMode = getInputMode();
 
         double[][] matrixA = null;
         double[] matrixB = null;
+        double[][] extendedMatrix;
 
         if (inputMode == 1) {
             matrixA = setMatrixManually();
@@ -22,24 +27,23 @@ public class Main {
             System.exit(1);
         }
 
+        printMatrix(Messages.MATRIX_OUTPUT_INFO_1.getMsg(), matrixA, matrixB);
+
+        extendedMatrix = matrixToTriangle(matrixA, matrixB);
+        Result packed = getResultFromExtendedMatrix(extendedMatrix);
+
+        printMatrix(Messages.MATRIX_OUTPUT_INFO_2.getMsg(), packed.getMatrix(), packed.getMatrixExtension());
+
+        extendedMatrix = getAnswer(extendedMatrix);
+        packed = getResultFromExtendedMatrix(extendedMatrix);
+        printMatrix(Messages.MATRIX_OUTPUT_INFO_3.getMsg(), packed.getMatrix(), packed.getMatrixExtension());
 
 
-/*        double[][] matrixA = {{1, 2}, {3, 4}};
-        double[] matrixB = {5, 6};*/
+/*        LineResult result = new LineResult(matrixA, matrixB);
+        matrixA = result.getMatrix();
+        matrixB = result.getMatrixExtension();
+        printMatrix(matrixA, matrixB);*/
 
-/*        double[][] matrixA = {{2, 5}, {6, 7}};
-        double[] matrixB = {5, 6};*/
-
-/*        double[][] matrixA = {{1, 5}, {0, 0}};
-        double[] matrixB = {5, 6};*/
-
-        printMatrix(matrixA, matrixB);
-
-
-        //System.out.println(isNoZeroColumns(matrixA));
-        //System.out.println(isNoZeroRows(matrixA));
-
-        //matrixToTriangle(matrixA, matrixB);
         System.exit(0);
     }
 }

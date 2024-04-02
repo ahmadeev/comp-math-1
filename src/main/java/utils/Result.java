@@ -16,4 +16,5 @@ public final class Result {
     public double[] getMatrixExtension() {
         return matrixExtension;
     }
+
 }
