@@ -15,6 +15,7 @@ public class Main {
         double[][] matrixA = null;
         double[] matrixB = null;
         double[][] extendedMatrix;
+        double determinant;
 
         if (inputMode == 1) {
             matrixA = setMatrixManually();
@@ -34,7 +35,13 @@ public class Main {
 
         printMatrix(Messages.MATRIX_OUTPUT_INFO_1.getMsg(), matrixA, matrixB);
 
-        System.out.println("Определитель матрицы: " + findDeterminant(matrixA) + "\n");
+        determinant = findDeterminant(matrixA);
+        System.out.printf("Определитель матрицы: %.2f\n", determinant);
+
+        if (determinant == 0) {
+            System.out.println("Определитель равен нулю! Система несовместна.");
+            System.exit(1);
+        }
 
         extendedMatrix = matrixToTriangle(matrixA, matrixB);
         Result packed = getResultFromExtendedMatrix(extendedMatrix);
