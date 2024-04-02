@@ -31,8 +31,8 @@ public class PrintMatrix {
     }
 
     public static void printMatrix(String msg, Result result) {
-        double[][] matrixA = result.getMatrix();
-        double[] matrixB = result.getMatrixExtension();
+        double[][] matrixA = result.matrix();
+        double[] matrixB = result.matrixExtension();
         printMatrix(msg, matrixA, matrixB);
     }
 

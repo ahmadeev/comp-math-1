@@ -13,7 +13,7 @@ public class MatrixUtility {
             if (extendedMatrix[i][i] != 0 && extendedMatrix[i][i] != 1) {
                 extendedMatrix[i] = mul(extendedMatrix, 1 / extendedMatrix[i][i], i);
             } else if (extendedMatrix[i][i] == 0) {
-                extendedMatrix = sortArray(extendedMatrix);
+                sortArray(extendedMatrix);
             }
             for (int k = i + 1; k < size; k++) {
                 double[] multipliedLine = mul(
@@ -39,6 +39,30 @@ public class MatrixUtility {
             }
         }
         return extendedMatrix;
+    }
+
+    public static double[][] matrixToTriangle(double[][] matrix) {
+        int size = matrix.length;
+        double[][] copiedMatrix = copyArray(matrix);
+
+        for (int i = 0; i < size; i++) {
+            if (copiedMatrix[i][i] == 0) {
+                sortArray(copiedMatrix);
+            }
+            for (int k = i + 1; k < size; k++) {
+                double[] multipliedLine = mul(
+                        copiedMatrix,
+                        findCoefficient(copiedMatrix[i][i], copiedMatrix[k][i]),
+                        i);
+                copiedMatrix[k] = sum(copiedMatrix, multipliedLine, k);
+
+            }
+        }
+        return copiedMatrix;
+    }
+
+    public static double[][] copyArray(double[][] array) {
+        return Arrays.stream(array).map(double[]::clone).toArray(double[][]::new);
     }
 
     public static boolean isNoZeroColumns(double[][] matrix) {
@@ -67,15 +91,15 @@ public class MatrixUtility {
         return true;
     }
 
-    public static double findDeterminant(double[][] matrix, double[] matrixExtension) {
+    public static double findDeterminant(double[][] matrix) {
         if (!isNoZeroColumns(matrix) || !isNoZeroRows(matrix)) {
             return 0;
         } else {
-            double[][] extendedMatrix = matrixToTriangle(matrix, matrixExtension);
-            int size = extendedMatrix.length;
-            double determinant = extendedMatrix[0][0];
+            double[][] matrixA = matrixToTriangle(matrix);
+            int size = matrixA.length;
+            double determinant = matrixA[0][0];
             for (int i = 1; i < size; i++) {
-                determinant *= extendedMatrix[i][i];
+                determinant *= matrixA[i][i];
             }
             return determinant;
         }
@@ -121,7 +145,7 @@ public class MatrixUtility {
         return -b/a;
     }
 
-    public static double[][] getAnswer(double[][] extendedMatrix) {
+    public static void getAnswer(double[][] extendedMatrix) {
         int size = extendedMatrix.length;
         for (int i = size - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -133,7 +157,6 @@ public class MatrixUtility {
 
             }
         }
-        return extendedMatrix;
     }
 
     public static int checkIfSolutionExists(double[][] extendedMatrix, int linePosition) {
@@ -171,7 +194,7 @@ public class MatrixUtility {
         return new Result(matrix, matrixExtension);
     }
 
-    public static double[][] sortArray(double[][] extendedMatrix) {
+    public static void sortArray(double[][] extendedMatrix) {
         int size = extendedMatrix.length;
         int[] counters = new int[size];
 
@@ -206,6 +229,5 @@ public class MatrixUtility {
                 extendedMatrix[i] = tempArrDbl;
             }
         }
-        return extendedMatrix;
     }
 }

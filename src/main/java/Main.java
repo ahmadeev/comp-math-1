@@ -21,28 +21,30 @@ public class Main {
             matrixB = setMatrixExtensionManually(matrixA);
         } else if (inputMode == 2) {
             Result result = setViaFile();
-            matrixA = result.getMatrix();
-            matrixB = result.getMatrixExtension();
+            matrixA = result.matrix();
+            matrixB = result.matrixExtension();
         } else if (inputMode == 3) {
             Result result = setRandomMatrix();
-            matrixA = result.getMatrix();
-            matrixB = result.getMatrixExtension();
+            matrixA = result.matrix();
+            matrixB = result.matrixExtension();
         } else {
             System.out.println("Режим ввода не был выбран! (Ошибка при вводе или такого режима не существует).");
             System.exit(1);
         }
 
         printMatrix(Messages.MATRIX_OUTPUT_INFO_1.getMsg(), matrixA, matrixB);
-        System.out.println("Определитель матрицы: " + findDeterminant(matrixA, matrixB) + "\n");
+
+        System.out.println("Определитель матрицы: " + findDeterminant(matrixA) + "\n");
 
         extendedMatrix = matrixToTriangle(matrixA, matrixB);
         Result packed = getResultFromExtendedMatrix(extendedMatrix);
 
-        printMatrix(Messages.MATRIX_OUTPUT_INFO_2.getMsg(), packed.getMatrix(), packed.getMatrixExtension());
+        printMatrix(Messages.MATRIX_OUTPUT_INFO_2.getMsg(), packed.matrix(), packed.matrixExtension());
 
-        extendedMatrix = getAnswer(extendedMatrix);
+        //  не пишем extendedMatrix = ..., потому что метод изменяет переданный объект
+        getAnswer(extendedMatrix);
         packed = getResultFromExtendedMatrix(extendedMatrix);
-        printMatrix(Messages.MATRIX_OUTPUT_INFO_3.getMsg(), packed.getMatrix(), packed.getMatrixExtension());
+        printMatrix(Messages.MATRIX_OUTPUT_INFO_3.getMsg(), packed.matrix(), packed.matrixExtension());
 
 /*        System.out.println(extendedMatrix[4][4]);
         System.out.printf("%7.15f", extendedMatrix[4][4]);*/

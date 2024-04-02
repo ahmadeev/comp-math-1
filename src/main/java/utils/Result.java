@@ -1,20 +1,21 @@
 package utils;
 
-public final class Result {
-    private final double[][] matrix;
-    private final double[] matrixExtension;
+public record Result(double[][] matrix, double[] matrixExtension) {
+/*  record-класс вместо
+        private final double[][] matrix;
+        private final double[] matrixExtension;
 
-    public Result(double[][] matrix, double[] matrixExtension) {
-        this.matrix = matrix;
-        this.matrixExtension = matrixExtension;
-    }
+        public Result(double[][] matrix, double[] matrixExtension) {
+            this.matrix = matrix;
+            this.matrixExtension = matrixExtension;
+        }
 
-    public double[][] getMatrix() {
-        return matrix;
-    }
+        public double[][] getMatrix() {
+            return matrix;
+        }
 
-    public double[] getMatrixExtension() {
-        return matrixExtension;
-    }
-
+        public double[] getMatrixExtension() {
+            return matrixExtension;
+        }
+*/
 }
