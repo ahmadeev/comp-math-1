@@ -1,24 +1,17 @@
 package utils;
 
 import Exceptions.InvalidArraySizeException;
-import Exceptions.NullMatrixException;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import org.apache.commons.io.IOUtils;
-
-import javax.sound.sampled.Line;
 
 import static java.util.Objects.isNull;
 
 public class Matrix {
     public static double[][] setMatrixManually() {
-        //double nullMatrix[][] = null;
         Scanner input = new Scanner(System.in);
 
         int n;
@@ -144,9 +137,9 @@ public class Matrix {
         System.out.println(msg);
         for (int i = 0; i < matrixA.length; i++) {
             for (double j : matrixA[i]){
-                System.out.printf("%7.2f", j);
+                System.out.printf("%8.2f", j);
             }
-            System.out.println(" | " + String.format("%7.2f", matrixB[i]));
+            System.out.println(" | " + String.format("%8.2f", matrixB[i]));
         }
         System.out.println();
 
@@ -158,10 +151,13 @@ public class Matrix {
         printMatrix(msg, matrixA, matrixB);
     }
 
+    public static void printMatrix(String msg, double[][] extendedMatrix) {
+        Result result = getResultFromExtendedMatrix(extendedMatrix);
+        printMatrix(msg, result);
+    }
+
     public static double[][] matrixToTriangle(double[][] matrix, double[] matrixExtension) {
         int size = matrixExtension.length;
-        //LineResult result = new LineResult(matrix, matrixExtension);
-        //double[][] extendedMatrix = result.getExtendedMatrix();
         double[][] extendedMatrix = getExtendedMatrix(matrix, matrixExtension);
 
         for (int i = 0; i < size; i++) {
@@ -175,7 +171,6 @@ public class Matrix {
                         extendedMatrix,
                         findCoefficient(extendedMatrix[i][i], extendedMatrix[k][i]),
                         i);
-                //System.out.println(Arrays.toString(multipliedLine));
                 extendedMatrix[k] = sum(extendedMatrix, multipliedLine, k);
                 switch (checkIfSolutionExists(extendedMatrix, k)) {
                     case (-1): {
@@ -192,16 +187,10 @@ public class Matrix {
                         break;
                     }
                 }
-                //printMatrix(getResultFromExtendedMatrix(extendedMatrix));
             }
         }
         return extendedMatrix;
-        //printMatrix(result.getResult(extendedMatrix));
     }
-
-/*    public static boolean isZeroDeterminant(double[][] matrix) {
-        return (isNoZeroRows(matrix) && isNoZeroColumns(matrix));
-    }*/
 
     public static boolean isNoZeroColumns(double[][] matrix) {
         int size = matrix.length;
@@ -228,44 +217,6 @@ public class Matrix {
         }
         return true;
     }
-
-/*    public static Result sum(double[][] matrixA, double[] matrixB, int firstLinePosition, int secondLinePosition) {
-        int size = matrixB.length;
-        firstLinePosition--;
-        secondLinePosition--;
-        for (int i = 0; i < size; i++) {
-            matrixA[secondLinePosition][i] += matrixA[firstLinePosition][i];
-        }
-        matrixB[secondLinePosition] += matrixB[firstLinePosition];
-        return new Result(matrixA, matrixB);
-    }
-
-    public static Result sum(Result result, int firstLinePosition, int secondLinePosition) {
-        double[][] matrixA = result.getMatrix();
-        double[] matrixB = result.getMatrixExtension();
-        return sum(matrixA, matrixB, firstLinePosition, secondLinePosition);
-    }
-
-    public static Result mul(double[][] matrixA, double[] matrixB, double coefficient, int linePosition) {
-        int size = matrixB.length;
-        linePosition--;
-        for (int i = 0; i < size; i++) {
-            matrixA[linePosition][i] *= coefficient;
-        }
-        matrixB[linePosition] *= coefficient;
-        return new Result(matrixA, matrixB);
-    }
-
-    public static Result mul(Result result, double coefficient, int linePosition) {
-        double[][] matrixA = result.getMatrix();
-        double[] matrixB = result.getMatrixExtension();
-        return mul(matrixA, matrixB, coefficient, linePosition);
-    }
-
-    public static double findCoefficient(double a, double b) {
-        if (a == 0.0d) return 1.0d;
-        return -b/a;
-    }*/
 
     public static double[] mul(double[][] extendedMatrix, double coefficient, int linePosition) {
         int subsize = extendedMatrix[0].length;
@@ -395,15 +346,6 @@ public class Matrix {
                 extendedMatrix[i] = tempArrDbl;
             }
         }
-
-        //printMatrix(getResultFromExtendedMatrix(extendedMatrix).getMatrix(), getResultFromExtendedMatrix(extendedMatrix).getMatrixExtension());
         return extendedMatrix;
     }
-
-/*    public static boolean isArraySorted(double[][] extendedMatrix) {
-        int size = extendedMatrix.length;
-        for (int i = 0; i < size; i++) {
-
-        }
-    }*/
 }

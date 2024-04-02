@@ -12,13 +12,14 @@ public class InputModeSwitch {
         System.out.println("""
                 Выберите источник ввода:
                 1 -- клавиатура,
-                2 -- файл
+                2 -- файл,
+                3 -- случайная генерация
                 """);
 
         int inputMode;
         try {
             inputMode = input.nextInt();
-            if (!(inputMode == 1 | inputMode == 2)) {
+            if (!(inputMode == 1 | inputMode == 2 | inputMode == 3)) {
                 throw new InvalidInputModeException("Такого режима ввода не существует!");
             }
             return inputMode;

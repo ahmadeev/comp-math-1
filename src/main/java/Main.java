@@ -1,10 +1,9 @@
-import utils.LineResult;
 import utils.Messages;
 import utils.Result;
 
 import static utils.Matrix.*;
 import static utils.InputModeSwitch.*;
-import static utils.Messages.MATRIX_OUTPUT_INFO_3;
+import static utils.RandomNumberGenerator.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,6 +19,10 @@ public class Main {
             matrixB = setMatrixExtensionManually(matrixA);
         } else if (inputMode == 2) {
             Result result = setViaFile();
+            matrixA = result.getMatrix();
+            matrixB = result.getMatrixExtension();
+        } else if (inputMode == 3) {
+            Result result = setRandomMatrix();
             matrixA = result.getMatrix();
             matrixB = result.getMatrixExtension();
         } else {
@@ -38,11 +41,8 @@ public class Main {
         packed = getResultFromExtendedMatrix(extendedMatrix);
         printMatrix(Messages.MATRIX_OUTPUT_INFO_3.getMsg(), packed.getMatrix(), packed.getMatrixExtension());
 
-
-/*        LineResult result = new LineResult(matrixA, matrixB);
-        matrixA = result.getMatrix();
-        matrixB = result.getMatrixExtension();
-        printMatrix(matrixA, matrixB);*/
+/*        System.out.println(extendedMatrix[4][4]);
+        System.out.printf("%7.15f", extendedMatrix[4][4]);*/
 
         System.exit(0);
     }
