@@ -1,6 +1,6 @@
 package utils;
 
-import Exceptions.InvalidInputModeException;
+import exceptions.InvalidInputModeException;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;

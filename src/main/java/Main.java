@@ -1,7 +1,9 @@
 import utils.Messages;
 import utils.Result;
 
-import static utils.Matrix.*;
+import static matrix.operations.SetMatrix.*;
+import static matrix.operations.PrintMatrix.*;
+import static matrix.operations.MatrixUtility.*;
 import static utils.InputModeSwitch.*;
 import static utils.RandomNumberGenerator.*;
 

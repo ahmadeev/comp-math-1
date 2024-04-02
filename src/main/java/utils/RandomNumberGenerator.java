@@ -1,6 +1,6 @@
 package utils;
 
-import Exceptions.InvalidArraySizeException;
+import exceptions.InvalidArraySizeException;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;

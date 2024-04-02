@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class InvalidInputModeException extends Exception {
     public InvalidInputModeException(String message) {
