@@ -36,7 +36,6 @@ public class RandomNumberGenerator {
         int n;
         double[][] matrix;
         double[] matrixExtension;
-        Result result;
 
         System.out.println("Введите размер матрицы: ");
         try {
@@ -70,8 +69,6 @@ public class RandomNumberGenerator {
         for (int i = 0; i < n; i++) {
             matrixExtension[i] = (new RandomNumber()).getNumber();
         }
-
-        //printMatrix("meow: ", matrix);
 
         return new Result(matrix, matrixExtension);
     }

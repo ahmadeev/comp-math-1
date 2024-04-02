@@ -31,6 +31,7 @@ public class Main {
         }
 
         printMatrix(Messages.MATRIX_OUTPUT_INFO_1.getMsg(), matrixA, matrixB);
+        System.out.println("Определитель матрицы: " + findDeterminant(matrixA, matrixB) + "\n");
 
         extendedMatrix = matrixToTriangle(matrixA, matrixB);
         Result packed = getResultFromExtendedMatrix(extendedMatrix);

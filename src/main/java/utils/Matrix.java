@@ -218,6 +218,20 @@ public class Matrix {
         return true;
     }
 
+    public static double findDeterminant(double[][] matrix, double[] matrixExtension) {
+        if (!isNoZeroColumns(matrix) || !isNoZeroRows(matrix)) {
+            return 0;
+        } else {
+            double[][] extendedMatrix = matrixToTriangle(matrix, matrixExtension);
+            int size = extendedMatrix.length;
+            double determinant = extendedMatrix[0][0];
+            for (int i = 1; i < size; i++) {
+                determinant *= extendedMatrix[i][i];
+            }
+            return determinant;
+        }
+    }
+
     public static double[] mul(double[][] extendedMatrix, double coefficient, int linePosition) {
         int subsize = extendedMatrix[0].length;
         double[] result = new double[subsize];
@@ -310,9 +324,6 @@ public class Matrix {
 
     public static double[][] sortArray(double[][] extendedMatrix) {
         int size = extendedMatrix.length;
-
-        //printMatrix(getResultFromExtendedMatrix(extendedMatrix).getMatrix(), getResultFromExtendedMatrix(extendedMatrix).getMatrixExtension());
-
         int[] counters = new int[size];
 
         for (int i = 0; i < size; i++) {
