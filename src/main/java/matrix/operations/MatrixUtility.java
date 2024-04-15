@@ -240,4 +240,33 @@ public class MatrixUtility {
             }
         }
     }
+
+    public static double[] getXFromExtendedMatrix(double[][] extendedMatrix) {
+        int size = extendedMatrix.length;
+        double[] x = new double[size];
+        for(int i = 0; i < size; i++) {
+            //  костыль в виде деления
+            //x[i] = extendedMatrix[i][size] / extendedMatrix[i][i];
+            x[i] = round(extendedMatrix[i][size] / extendedMatrix[i][i], 2);
+        }
+        return x;
+    }
+
+    public static double[] getR(double[][] matrix, double[] matrixExtension, double[] x) {
+        int size = x.length;
+        double[] r = new double[size];
+
+        for(int i = 0; i < size; i++) {
+            r[i] = matrixExtension[i];
+            for(int j = 0; j < size; j++) {
+                r[i] -= matrix[i][j] * x[j];
+            }
+            r[i] = round(r[i], 2);
+        }
+        return r;
+    }
+
+    public static double round(double x, int precision) {
+        return Math.ceil(x * Math.pow(10, precision)) / Math.pow(10, precision);
+    }
 }

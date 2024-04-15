@@ -1,6 +1,8 @@
 import utils.Messages;
 import utils.Result;
 
+import java.util.Arrays;
+
 import static matrix.operations.SetMatrix.*;
 import static matrix.operations.PrintMatrix.*;
 import static matrix.operations.MatrixUtility.*;
@@ -55,6 +57,12 @@ public class Main {
 
 /*        System.out.println(extendedMatrix[4][4]);
         System.out.printf("%7.15f", extendedMatrix[4][4]);*/
+
+        double[] x = getXFromExtendedMatrix(extendedMatrix);
+        double[] r = getR(matrixA, matrixB, x);
+
+        System.out.println(Arrays.toString(x));
+        System.out.println(Arrays.toString(r));
 
         System.exit(0);
     }
