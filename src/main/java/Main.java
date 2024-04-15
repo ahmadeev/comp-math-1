@@ -61,8 +61,10 @@ public class Main {
         double[] x = getXFromExtendedMatrix(extendedMatrix);
         double[] r = getR(matrixA, matrixB, x);
 
-        System.out.println(Arrays.toString(x));
-        System.out.println(Arrays.toString(r));
+        //printMatrix("", matrixA, matrixB);
+
+        System.out.println("Вектор неизвестных:" + Arrays.toString(x));
+        System.out.println("Вектор невязок:" + Arrays.toString(r));
 
         System.exit(0);
     }
