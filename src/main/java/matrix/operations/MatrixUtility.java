@@ -5,6 +5,9 @@ import utils.Result;
 import java.util.Arrays;
 
 public class MatrixUtility {
+
+    public static int numberOfSwitches = 0;
+
     public static double[][] matrixToTriangle(double[][] matrix, double[] matrixExtension) {
         int size = matrixExtension.length;
         double[][] extendedMatrix = getExtendedMatrix(matrix, matrixExtension);
@@ -101,6 +104,9 @@ public class MatrixUtility {
             for (int i = 1; i < size; i++) {
                 determinant *= matrixA[i][i];
             }
+            numberOfSwitches = numberOfSwitches % 2 == 1 ? -1 : 1;
+            determinant = numberOfSwitches * determinant;
+            numberOfSwitches = 0;
             return determinant;
         }
     }
@@ -215,6 +221,8 @@ public class MatrixUtility {
                 double[] tempArrDbl = extendedMatrix[i-1];
                 extendedMatrix[i-1] = extendedMatrix[i];
                 extendedMatrix[i] = tempArrDbl;
+
+                numberOfSwitches++;
             }
         }
 
@@ -227,6 +235,8 @@ public class MatrixUtility {
                 double[] tempArrDbl = extendedMatrix[i-1];
                 extendedMatrix[i-1] = extendedMatrix[i];
                 extendedMatrix[i] = tempArrDbl;
+
+                numberOfSwitches++;
             }
         }
     }
